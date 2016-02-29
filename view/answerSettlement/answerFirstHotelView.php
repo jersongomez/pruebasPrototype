@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="../media/css/font-awesome.min.css?v=<?php echo VERSION; ?>">
 
         <link rel="stylesheet" href="../media/css/apps/answerSettlement.css?v=<?php echo VERSION; ?>">
-        <script src="../media/js/apps/initApp.js?v=<?php echo VERSION; ?>"></script>
+        <script src="../media/js/apps/initAppAnsewerSettlement.js?v=<?php echo VERSION; ?>"></script>
         <script src="../media/js/apps/corePrototypeApp.js?v=<?php echo VERSION; ?>"></script>
 
         <script src="../media/js/bootstrap.min.js?v=<?php echo VERSION; ?>"></script>
@@ -34,20 +34,13 @@
 
         <script src="../media/js/jquery.validate.js?v=<?php echo VERSION; ?>"></script>
         <script src="../media/js/php.js?v=<?php echo VERSION; ?>"></script>
-        <script src="../language/sites/es-ES_sites.ini?v=<?php echo VERSION; ?>"></script>
+        <script src="../language/es-ES_sites.ini?v=<?php echo VERSION; ?>"></script>
         <script>
             const hotelsNoAdmin = '<?php echo HOTEL_NO_ADMITE_NINOS; ?>';
             var __app = new App();
 <?php
-//    include_once JPATH_BASE . "/configuracion/config.php";
-if ($this->codigo_pais == 'CO' || $this->codigo_pais == 'EC' || $this->codigo_pais == 'SV' || $this->codigo_pais == 'OTROS') {
-# Cargar Hoteles
-    include(RUTA_AUTOCOMPLETADO . "/localdata{$this->codigo_pais}.js");
-
-# Cargar Aereos
-    include(RUTA_AUTOCOMPLETADO . "/localdataAer{$this->codigo_pais}.js");
-}
-include(RUTA_AUTOCOMPLETADO . "/acomodacionHoteles.js");
+include(RUTA_AUTOCOMPLETADO . "/autocomplet.js");
+include(RUTA_AUTOCOMPLETADO . "/acomodationsHotel.js");
 ?>
         </script>
     </head>

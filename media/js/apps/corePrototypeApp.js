@@ -242,7 +242,7 @@ App.prototype.validaHotelCombinados = function (hotel) {
 
     jq.ajax({
 //        url: DIRECTORIO_RAIZ + "/web_pagGDS/liquidacion.php",
-        url: "liquidacion.php",
+        url: "answerSettlement.php",
         async: false,
         data: str,
         contentType: "application/x-www-form-urlencoded",
@@ -255,6 +255,7 @@ App.prototype.validaHotelCombinados = function (hotel) {
         success: function (datas) {
             jq(".classComponente").show();
             jq(".planCombinadoHotel" + componente.capitalize()).hide();
+            jq(".planCombinado").hide();
             if (datas.verifica != null) {
                 jq(".classComponente").hide();
                 jq("#divPlanCombinado" + componente.capitalize()).show();
@@ -280,8 +281,8 @@ App.prototype.submitForm = function (settings) {
         var nameForm = jq(form).attr("name");
         jq("#frm_" + componente).find('input.datePickerEs').each(function () {
             var campoHidden = jq(this).attr("name") + "f";
-            var dateFormat = jq(this).val();
-            var dateFormat = jq.datepicker.formatDate('yy-mm-dd', new Date(dateFormat));
+            var dateFormat = new Date(Date.parse(jq(this).datepicker('getDate')));
+            var dateFormat = jq.datepicker.formatDate('yy-mm-dd', dateFormat);
             jq("." + campoHidden).val(dateFormat);
         });
 
@@ -1106,4 +1107,33 @@ App.prototype.loadDatosBooking = function () {
         }
     });
 
+};
+
+App.prototype.filtrosHabCotizadas = function () {
+    jq('a.filtrosClass').click(function () {
+        var componente = __app.componenteActivo();
+        var str = jq('#frm_' + componente).serializeArray();
+        str.push({name: 'action', value: 'filtrosCotizaciones'});
+        str.push({name: 'liquidacion', value: jq("#dataLiq").val()});
+        str.push({name: 'filtro', value: jq(this).attr("data-filtros")});
+        console.log(jq(this).attr("data-filtros"));
+        jq.ajax({
+            url: "answerSettlement.php",
+            async: false,
+            data: str,
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "html", //xml,html,script,json
+            error: function () {
+                console.log("Ha ocurrido un error");
+            },
+            ifModified: false,
+            processData: true,
+            success: function (datas) {
+                console.log("paso por aca");
+                jq("#cotizaciones").html(datas);
+            },
+            type: "POST",
+            timeout: 3000
+        });
+    });
 };
