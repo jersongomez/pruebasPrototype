@@ -72,7 +72,7 @@ include(RUTA_AUTOCOMPLETADO . "/acomodationsHotel.js");
                             <input class="plHotel" id="plane" name="plane" type="hidden" value="H" />
                             <input id="componente" name="componente" type="hidden" value="Hotel" />
                             <input id="sigPais" name="sigPais" type="hidden" value="" />
-                            <input id="idioma" name="idioma" type="hidden" value="" />
+                            <input id="idioma" name="idioma" type="hidden" value="<?php echo $this->sigIdioma; ?>" />
                             <input id="codPais" name="codPais" type="hidden" value="" />	
                             <input id="hab1ninosHotel" name="hab1ninos" type="hidden" value="0" />	
                             <input id="hab2ninosHotel" name="hab2ninos" type="hidden" value="0" />	

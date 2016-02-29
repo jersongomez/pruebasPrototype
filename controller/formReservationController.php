@@ -1,6 +1,6 @@
 <?php
 
-class indexController
+class formReservationController
 {
 
     private $requestMethod;
